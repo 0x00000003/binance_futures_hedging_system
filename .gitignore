@@ -1,0 +1,7 @@
+.idea/
+logs/
+target
+*.iml
+*.tmp
+src/main/java/com/binance/client/constant/PrivateConfig.java
+src/test/java/com/binance/client/examples/constants/PrivateConfig.java

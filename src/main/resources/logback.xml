@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration debug="false" scan="false" scanPeriod="3000000 seconds">
+
+  <!-- 输出到控制台 -->
+  <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+    <encoder>
+      <!--pattern>%d{yyyy-MM-dd HH:mm:ss} [%level] - %m%n</pattern-->
+      <!-- 屏幕输出直接去掉格式，完全当System.out.println 来用-->
+      <pattern>%m%n</pattern>
+    </encoder>
+  </appender>
+
+  <!-- 按日期滚动日志 -->
+  <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+    <!-- 日志存放位置 -->
+    <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+      <fileNamePattern>logs/%d{yyyy-MM-dd-HH-mm-ss-SSS}.log</fileNamePattern>
+
+
+      <!-- 保存30天历史 -->
+      <maxHistory>30</maxHistory>
+    </rollingPolicy>
+    <encoder>
+      <!--pattern>%d{yyyy-MM-dd HH:mm:ss} [%level] - %m%n</pattern-->
+      <!-- 日志文件中 添加2个空格 ，然后 日期 + 时间戳 带毫秒，经过性能评估，这个毫秒性能没问题-->
+      <pattern>%m  %d{yyyy-MM-dd HH:mm:ss:SSS}%n</pattern>
+    </encoder>
+
+    <triggeringPolicy
+            class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
+      <maxFileSize>5MB</maxFileSize>
+    </triggeringPolicy>
+  </appender>
+
+  <root level="error">
+    <appender-ref ref="STDOUT" />
+    <appender-ref ref="FILE" />
+  </root>
+
+</configuration>
